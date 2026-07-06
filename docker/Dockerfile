@@ -1,5 +1,5 @@
 # ─── Base Stage ──────────────────────────────────────────────────────
-FROM node:20-alpine AS base
+FROM node:26-alpine AS base
 RUN corepack enable && corepack prepare pnpm@10 --activate
 WORKDIR /app
 
@@ -21,7 +21,7 @@ FROM installer AS api-builder
 RUN pnpm build --filter=@valorasec/api
 
 # ─── API Runner ──────────────────────────────────────────────────────
-FROM node:20-alpine AS api-runner
+FROM node:26-alpine AS api-runner
 RUN corepack enable && corepack prepare pnpm@10 --activate
 WORKDIR /app
 
@@ -41,7 +41,7 @@ FROM installer AS web-builder
 RUN pnpm build --filter=@valorasec/web
 
 # ─── Web Runner ──────────────────────────────────────────────────────
-FROM node:20-alpine AS web-runner
+FROM node:26-alpine AS web-runner
 RUN corepack enable && corepack prepare pnpm@10 --activate
 WORKDIR /app
 
