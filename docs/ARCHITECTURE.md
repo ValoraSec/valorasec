@@ -72,3 +72,20 @@ Three Soroban contracts are provided:
 1. **Audit Registry** — Stores and verifies audit records on-chain
 2. **Reputation** — Tracks user reputation scores and badges
 3. **Bug Bounty** — Manages bug bounty programs and payouts
+
+### Contract Deployment
+
+To deploy contracts to Stellar testnet:
+
+```bash
+# Build and deploy all contracts
+make -C contracts deploy-testnet
+
+# Or use the script directly
+export SOURCE_SECRET_KEY="S..."  # Your Stellar secret key
+bash contracts/scripts/deploy.sh
+```
+
+After deployment, contract IDs are saved to `contracts/.contract-ids` and the `.env.example` file is updated with the deployed addresses.
+
+View deployed contracts on [Stellar Expert](https://stellar.expert/explorer/testnet).

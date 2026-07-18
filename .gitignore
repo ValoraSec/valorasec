@@ -32,6 +32,7 @@ docker/data/
 target/
 *.wasm
 contracts/*/target/
+contracts/.contract-ids
 
 # Debug
 npm-debug.log*
