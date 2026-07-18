@@ -40,6 +40,6 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

@@ -18,6 +18,6 @@ export default function NotFound() {
           </Button>
         </Link>
       </div>
-    </div>
+    </main>
   );
 }
