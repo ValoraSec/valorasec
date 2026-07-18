@@ -1,6 +1,5 @@
 import { describe, it, expect } from 'vitest';
 import { axe } from 'jest-axe';
-import type { AxeResults } from 'jest-axe';
 
 /**
  * Accessibility audit test suite using jest-axe.
@@ -19,7 +18,7 @@ import type { AxeResults } from 'jest-axe';
  * Validates that an HTML string or DOM element passes axe-core checks.
  * Returns the axe results for assertion.
  */
-export async function runAxeCheck(html: string): Promise<AxeResults> {
+async function runAxeCheck(html: string) {
   // In a real test, render the component to jsdom and pass the container
   const container = document.createElement('div');
   container.innerHTML = html;
