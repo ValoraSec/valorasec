@@ -16,11 +16,11 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
   }, [error]);
 
   return (
-    <div className="bg-background flex min-h-screen items-center justify-center">
+    <main id="main-content" className="bg-background flex min-h-screen items-center justify-center" role="alert">
       <div className="px-6 text-center">
         <div className="relative mb-6 inline-block">
-          <Shield className="text-destructive h-16 w-16" />
-          <AlertTriangle className="text-destructive absolute -bottom-1 -right-1 h-8 w-8 animate-pulse" />
+          <Shield className="text-destructive h-16 w-16" aria-hidden="true" />
+          <AlertTriangle className="text-destructive absolute -bottom-1 -right-1 h-8 w-8 animate-pulse" aria-hidden="true" />
         </div>
         <h1 className="font-heading mb-2 text-3xl font-bold">Something went wrong</h1>
         <p className="text-muted-foreground mb-8 max-w-md">
@@ -40,6 +40,6 @@ export default function ErrorPage({ error, reset }: ErrorPageProps) {
           </Link>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

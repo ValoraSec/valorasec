@@ -10,6 +10,7 @@
     "lint": "eslint src/",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
+    "test:a11y": "vitest run --passWithNoTests src/__tests__/a11y/",
     "clean": "rm -rf .next dist"
   },
   "dependencies": {
@@ -45,10 +46,14 @@
     "zustand": "^5.0.0"
   },
   "devDependencies": {
+    "@types/jest-axe": "^3.5.9",
     "@types/node": "^20.17.0",
     "@types/react": "^18.3.0",
     "@types/react-dom": "^18.3.0",
     "autoprefixer": "^10.4.0",
+    "axe-core": "^4.12.1",
+    "jest-axe": "^9.0.0",
+    "jsdom": "^29.1.1",
     "postcss": "^8.4.0",
     "tailwindcss": "^3.4.0",
     "typescript": "^5.7.0",

@@ -43,7 +43,7 @@ export default function NewProjectPage() {
   return (
     <div className="bg-background min-h-screen">
       <Navbar />
-      <main className="mx-auto max-w-2xl px-6 py-8">
+      <main id="main-content" className="mx-auto max-w-2xl px-6 py-8" tabIndex={-1}>
         <Link
           href="/projects"
           className="text-muted-foreground hover:text-foreground mb-6 inline-flex items-center text-sm"
@@ -55,7 +55,7 @@ export default function NewProjectPage() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
-            <div className="bg-destructive/10 border-destructive/30 text-destructive rounded-md border p-3 text-sm">
+            <div className="bg-destructive/10 border-destructive/30 text-destructive rounded-md border p-3 text-sm" role="alert">
               {error}
             </div>
           )}
@@ -105,7 +105,7 @@ export default function NewProjectPage() {
           </div>
 
           <Button type="submit" disabled={loading || !name}>
-            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+            {loading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" /> : null}
             Create Project
           </Button>
         </form>

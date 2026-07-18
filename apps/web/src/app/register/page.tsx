@@ -35,7 +35,7 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="bg-background flex min-h-screen items-center justify-center">
+    <main id="main-content" className="bg-background flex min-h-screen items-center justify-center">
       <div className="w-full max-w-md px-6">
         <div className="mb-8 text-center">
           <Link href="/" className="mb-6 inline-flex items-center gap-2">
@@ -50,7 +50,7 @@ export default function RegisterPage() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {error && (
-            <div className="bg-destructive/10 border-destructive/30 text-destructive rounded-md border p-3 text-sm">
+            <div className="bg-destructive/10 border-destructive/30 text-destructive rounded-md border p-3 text-sm" role="alert">
               {error}
             </div>
           )}
@@ -67,6 +67,7 @@ export default function RegisterPage() {
               className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:ring-ring w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2"
               placeholder="Satoshi Nakamoto"
               required
+              autoComplete="name"
             />
           </div>
 
@@ -82,6 +83,7 @@ export default function RegisterPage() {
               className="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:ring-ring w-full rounded-md border px-3 py-2 text-sm focus:outline-none focus:ring-2"
               placeholder="you@example.com"
               required
+              autoComplete="email"
             />
           </div>
 
@@ -98,6 +100,7 @@ export default function RegisterPage() {
               placeholder="Min. 8 characters"
               required
               minLength={8}
+              autoComplete="new-password"
             />
           </div>
 
@@ -114,6 +117,6 @@ export default function RegisterPage() {
           </Link>
         </p>
       </div>
-    </div>
+    </main>
   );
 }

@@ -324,7 +324,7 @@ export default function DashboardPage() {
   return (
     <div className="bg-background min-h-screen">
       <Navbar />
-      <main className="mx-auto max-w-7xl px-6 py-8">
+      <main id="main-content" className="mx-auto max-w-7xl px-6 py-8" tabIndex={-1}>
         {/* Header */}
         <div className="animate-fade-in mb-8 flex items-center justify-between">
           <div>
@@ -353,8 +353,9 @@ export default function DashboardPage() {
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center py-32">
-            <Loader2 className="text-primary h-8 w-8 animate-spin" />
+          <div className="flex items-center justify-center py-32" role="status" aria-label="Loading dashboard">
+            <Loader2 className="text-primary h-8 w-8 animate-spin" aria-hidden="true" />
+            <span className="sr-only">Loading dashboard data...</span>
           </div>
         ) : (
           <>
