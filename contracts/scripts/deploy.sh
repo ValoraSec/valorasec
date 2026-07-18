@@ -171,7 +171,7 @@ verify_contract() {
         wasm_hash=$(soroban contract info \
             --id "$contract_id" \
             --rpc-url "$SOROBAN_RPC_URL" \
-            --network-passphrase "$SOROBAN_NETWORK_PASSPHRASE" 2>&1 | grep -oP 'wasm hash:\s*\K[a-f0-9]+' || echo "N/A")
+            --network-passphrase "$SOROBAN_NETWORK_PASSPHRASE" 2>&1 | grep -oE 'wasm hash: *[a-f0-9]+' | sed 's/wasm hash: *//' || echo "N/A")
 
         log_success "$name verified. Wasm hash: $wasm_hash"
     else
