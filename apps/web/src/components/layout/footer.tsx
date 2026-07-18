@@ -7,8 +7,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-6 py-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
           <div className="md:col-span-1">
-            <Link href="/" className="mb-3 flex items-center gap-2">
-              <Shield className="text-primary h-5 w-5" />
+            <Link href="/" className="mb-3 flex items-center gap-2" aria-label="ValoraSec Home">
+              <Shield className="text-primary h-5 w-5" aria-hidden="true" />
               <span className="font-heading text-lg font-bold">
                 Valora<span className="text-primary">Sec</span>
               </span>
@@ -18,8 +18,8 @@ export function Footer() {
             </p>
           </div>
           <div>
-            <h4 className="mb-3 text-sm font-semibold">Product</h4>
-            <ul className="text-muted-foreground space-y-2 text-sm">
+            <h3 className="mb-3 text-sm font-semibold">Product</h3>
+            <ul className="text-muted-foreground space-y-2 text-sm" role="list">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
                   Home
@@ -31,38 +31,41 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
-                  Changelog
-                </a>
+                <Link href="/accessibility" className="hover:text-foreground transition-colors">
+                  Accessibility
+                </Link>
               </li>
             </ul>
           </div>
           <div>
-            <h4 className="mb-3 text-sm font-semibold">Community</h4>
-            <ul className="text-muted-foreground space-y-2 text-sm">
+            <h3 className="mb-3 text-sm font-semibold">Community</h3>
+            <ul className="text-muted-foreground space-y-2 text-sm" role="list">
               <li>
                 <a
                   href="https://github.com/valorasec/valorasec"
                   className="hover:text-foreground transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="ValoraSec on GitHub (opens in new tab)"
                 >
                   GitHub
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
+                <a href="#" className="hover:text-foreground transition-colors" aria-label="Join our Discord community">
                   Discord
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
+                <a href="#" className="hover:text-foreground transition-colors" aria-label="Follow us on Twitter">
                   Twitter
                 </a>
               </li>
             </ul>
           </div>
           <div>
-            <h4 className="mb-3 text-sm font-semibold">Legal</h4>
-            <ul className="text-muted-foreground space-y-2 text-sm">
+            <h3 className="mb-3 text-sm font-semibold">Legal</h3>
+            <ul className="text-muted-foreground space-y-2 text-sm" role="list">
               <li>
                 <a href="#" className="hover:text-foreground transition-colors">
                   Privacy Policy

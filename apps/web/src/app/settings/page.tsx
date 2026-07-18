@@ -35,7 +35,7 @@ export default function SettingsPage() {
   return (
     <div className="bg-background min-h-screen">
       <Navbar />
-      <main className="mx-auto max-w-3xl px-6 py-8">
+      <main id="main-content" className="mx-auto max-w-3xl px-6 py-8" tabIndex={-1}>
         <div className="animate-fade-in">
           <h1 className="font-heading mb-2 text-3xl font-bold">Settings</h1>
           <p className="text-muted-foreground mb-8">Manage your account and preferences</p>
@@ -56,8 +56,9 @@ export default function SettingsPage() {
 
             <form onSubmit={handleSave} className="space-y-4">
               <div>
-                <label className="mb-1.5 block text-sm font-medium">Email</label>
+                <label htmlFor="settings-email" className="mb-1.5 block text-sm font-medium">Email</label>
                 <input
+                  id="settings-email"
                   type="email"
                   value={user.email}
                   disabled
@@ -65,11 +66,11 @@ export default function SettingsPage() {
                 />
               </div>
               <div>
-                <label htmlFor="name" className="mb-1.5 block text-sm font-medium">
+                <label htmlFor="settings-name" className="mb-1.5 block text-sm font-medium">
                   Name
                 </label>
                 <input
-                  id="name"
+                  id="settings-name"
                   type="text"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -77,8 +78,9 @@ export default function SettingsPage() {
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-sm font-medium">Role</label>
+                <label htmlFor="settings-role" className="mb-1.5 block text-sm font-medium">Role</label>
                 <input
+                  id="settings-role"
                   type="text"
                   value={user.role}
                   disabled
@@ -88,12 +90,13 @@ export default function SettingsPage() {
               {message && (
                 <div
                   className={`rounded-md p-3 text-sm ${message.includes('success') ? 'bg-success/10 border-success/30 text-success border' : 'bg-destructive/10 border-destructive/30 text-destructive border'}`}
+                  role="alert"
                 >
                   {message}
                 </div>
               )}
               <Button type="submit" disabled={saving}>
-                {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : null}
+                {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" /> : null}
                 Save Changes
               </Button>
             </form>

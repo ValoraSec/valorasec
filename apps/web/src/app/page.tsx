@@ -38,12 +38,12 @@ const features = [
 
 export default function LandingPage() {
   return (
-    <div className="bg-background min-h-screen">
+      <main id="main-content">
       {/* Navigation */}
       <header className="border-border/50 bg-background/95 sticky top-0 z-50 w-full border-b backdrop-blur">
         <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
-          <Link href="/" className="flex items-center gap-2">
-            <Shield className="text-primary h-6 w-6" />
+          <Link href="/" className="flex items-center gap-2" aria-label="ValoraSec Home">
+            <Shield className="text-primary h-6 w-6" aria-hidden="true" />
             <span className="font-heading text-xl font-bold tracking-tight">
               Valora<span className="text-primary">Sec</span>
             </span>
@@ -119,10 +119,9 @@ export default function LandingPage() {
             Comprehensive tools for auditing and securing your Soroban smart contracts.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {features.map((feature) => (
-            <div key={feature.title} className="cyber-card-hover p-6">
-              <feature.icon className="text-primary mb-4 h-8 w-8" />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">            {features.map((feature) => (
+            <div key={feature.title} className="cyber-card-hover p-6" role="article">
+              <feature.icon className="text-primary mb-4 h-8 w-8" aria-hidden="true" />
               <h3 className="mb-2 text-lg font-semibold">{feature.title}</h3>
               <p className="text-muted-foreground text-sm">{feature.description}</p>
             </div>
@@ -146,6 +145,7 @@ export default function LandingPage() {
       </section>
 
       <Footer />
+      </main>
     </div>
   );
 }

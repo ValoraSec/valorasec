@@ -22,6 +22,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body className="bg-background min-h-screen font-sans">
+        <a
+          href="#main-content"
+          className="bg-primary text-primary-foreground focus:outline-primary absolute left-2 top-2 z-[100] rounded-md px-4 py-2 text-sm font-medium opacity-0 transition-opacity focus:opacity-100"
+        >
+          Skip to main content
+        </a>
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem={false}>
           <QueryProvider>{children}</QueryProvider>
           <Toaster />

@@ -33,7 +33,7 @@ export default function ProjectsPage() {
   return (
     <div className="bg-background min-h-screen">
       <Navbar />
-      <main className="mx-auto max-w-7xl px-6 py-8">
+      <main id="main-content" className="mx-auto max-w-7xl px-6 py-8" tabIndex={-1}>
         <div className="animate-fade-in mb-8 flex items-center justify-between">
           <div>
             <h1 className="font-heading text-3xl font-bold">Projects</h1>
@@ -51,7 +51,9 @@ export default function ProjectsPage() {
         <div className="mb-6">
           <div className="relative max-w-md">
             <Search className="text-muted-foreground absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2" />
+            <label htmlFor="search-projects" className="sr-only">Search projects</label>
             <input
+              id="search-projects"
               type="text"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -62,8 +64,9 @@ export default function ProjectsPage() {
         </div>
 
         {loading ? (
-          <div className="flex items-center justify-center py-32">
-            <Loader2 className="text-primary h-8 w-8 animate-spin" />
+          <div className="flex items-center justify-center py-32" role="status" aria-label="Loading projects">
+            <Loader2 className="text-primary h-8 w-8 animate-spin" aria-hidden="true" />
+            <span className="sr-only">Loading projects...</span>
           </div>
         ) : filtered.length === 0 ? (
           <div className="cyber-card p-12 text-center">
