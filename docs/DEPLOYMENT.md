@@ -2,16 +2,49 @@
 
 ## Docker Deployment
 
-The easiest way to deploy ValoraSec is with Docker Compose:
+### Development
+
+The easiest way to deploy ValoraSec in development is with Docker Compose:
 
 ```bash
 # Clone the repository
 git clone https://github.com/valorasec/valorasec.git
 cd valorasec
 
-# Start the full stack
+# Start the full stack (development)
 docker compose -f docker/docker-compose.yml up -d
 ```
+
+### Production
+
+For production, use the production profile which adds SSL via Caddy, resource limits, log rotation, and non-default credentials:
+
+```bash
+# 1. Copy and fill in the production env file
+cp docker/prod.env.example docker/prod.env
+# Edit docker/prod.env with your real values
+
+# 2. Start with both compose files
+docker compose -f docker/docker-compose.yml -f docker/docker-compose.prod.yml up -d
+
+# 3. Verify all services are healthy
+docker compose -f docker/docker-compose.yml -f docker/docker-compose.prod.yml ps
+```
+
+**Production features:**
+- **SSL/TLS**: Automatic HTTPS via Caddy with Let's Encrypt
+- **Security headers**: X-Content-Type-Options, X-Frame-Options, HSTS, etc.
+- **No direct port exposure**: API and web are only accessible through Caddy
+- **Resource limits**: CPU and memory limits on all containers
+- **Log rotation**: JSON file logging with size-based rotation
+- **Redis auth**: Password-protected Redis instance
+- **Health checks**: All services have health checks configured
+
+**Prerequisites:**
+1. A domain name pointing to your server (for SSL)
+2. Ports 80 and 443 accessible from the internet
+3. Docker and Docker Compose installed
+4. `docker/prod.env` configured with real credentials
 
 ## Environment Variables
 
