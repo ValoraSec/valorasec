@@ -56,7 +56,9 @@ export default function SettingsPage() {
 
             <form onSubmit={handleSave} className="space-y-4">
               <div>
-                <label htmlFor="settings-email" className="mb-1.5 block text-sm font-medium">Email</label>
+                <label htmlFor="settings-email" className="mb-1.5 block text-sm font-medium">
+                  Email
+                </label>
                 <input
                   id="settings-email"
                   type="email"
@@ -78,7 +80,9 @@ export default function SettingsPage() {
                 />
               </div>
               <div>
-                <label htmlFor="settings-role" className="mb-1.5 block text-sm font-medium">Role</label>
+                <label htmlFor="settings-role" className="mb-1.5 block text-sm font-medium">
+                  Role
+                </label>
                 <input
                   id="settings-role"
                   type="text"
@@ -96,7 +100,9 @@ export default function SettingsPage() {
                 </div>
               )}
               <Button type="submit" disabled={saving}>
-                {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" /> : null}
+                {saving ? (
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" aria-hidden="true" />
+                ) : null}
                 Save Changes
               </Button>
             </form>
@@ -160,10 +166,13 @@ export default function SettingsPage() {
                     <p className="text-sm font-medium">{item.label}</p>
                     <p className="text-muted-foreground text-xs">{item.desc}</p>
                   </div>
-                  <label className="relative inline-flex cursor-not-allowed items-center opacity-50">
+                  <span
+                    className="relative inline-flex cursor-not-allowed items-center opacity-50"
+                    aria-label={`${item.label} toggle (disabled)`}
+                  >
                     <input type="checkbox" checked disabled className="sr-only" />
                     <div className="bg-primary h-5 w-9 rounded-full" />
-                  </label>
+                  </span>
                 </div>
               ))}
             </div>

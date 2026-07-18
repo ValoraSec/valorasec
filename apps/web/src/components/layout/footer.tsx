@@ -19,7 +19,7 @@ export function Footer() {
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold">Product</h3>
-            <ul className="text-muted-foreground space-y-2 text-sm" role="list">
+            <ul className="text-muted-foreground space-y-2 text-sm">
               <li>
                 <Link href="/" className="hover:text-foreground transition-colors">
                   Home
@@ -39,7 +39,7 @@ export function Footer() {
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold">Community</h3>
-            <ul className="text-muted-foreground space-y-2 text-sm" role="list">
+            <ul className="text-muted-foreground space-y-2 text-sm">
               <li>
                 <a
                   href="https://github.com/valorasec/valorasec"
@@ -52,34 +52,24 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors" aria-label="Join our Discord community">
-                  Discord
-                </a>
+                <span className="text-muted-foreground text-sm">Discord</span>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors" aria-label="Follow us on Twitter">
-                  Twitter
-                </a>
+                <span className="text-muted-foreground text-sm">Twitter</span>
               </li>
             </ul>
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold">Legal</h3>
-            <ul className="text-muted-foreground space-y-2 text-sm" role="list">
+            <ul className="text-muted-foreground space-y-2 text-sm">
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
-                  Privacy Policy
-                </a>
+                <span className="text-muted-foreground text-sm">Privacy Policy</span>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
-                  Terms of Service
-                </a>
+                <span className="text-muted-foreground text-sm">Terms of Service</span>
               </li>
               <li>
-                <a href="#" className="hover:text-foreground transition-colors">
-                  MIT License
-                </a>
+                <span className="text-muted-foreground text-sm">MIT License</span>
               </li>
             </ul>
           </div>

@@ -51,10 +51,6 @@ describe('Accessibility Audit', () => {
       </main>
     `;
     const results = await runAxeCheck(html);
-    // This should have violations for missing accessible name
-    const buttonViolations = results.violations.filter((v) =>
-      v.nodes.some((n) => n.html.includes('button')),
-    );
     // Depending on axe version, this may or may not flag
     expect(results.violations.length).toBeGreaterThanOrEqual(0);
   });

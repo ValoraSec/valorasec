@@ -37,15 +37,15 @@ export default function AccessibilityPage() {
           <h2 className="mb-3 text-xl font-semibold">Conformance Status</h2>
           <p className="text-muted-foreground leading-relaxed">
             The Web Content Accessibility Guidelines (WCAG) defines requirements for designers and
-            developers to improve accessibility for people with disabilities. It defines three levels
-            of conformance: Level A, Level AA, and Level AAA. ValoraSec aims to be fully conformant
-            with WCAG 2.1 Level AA.
+            developers to improve accessibility for people with disabilities. It defines three
+            levels of conformance: Level A, Level AA, and Level AAA. ValoraSec aims to be fully
+            conformant with WCAG 2.1 Level AA.
           </p>
         </section>
 
         <section className="mb-8">
           <h2 className="mb-3 text-xl font-semibold">Accessibility Features</h2>
-          <ul className="text-muted-foreground space-y-2 leading-relaxed" role="list">
+          <ul className="text-muted-foreground space-y-2 leading-relaxed">
             <li>
               <strong className="text-foreground">Keyboard Navigation:</strong> All interactive
               elements are fully operable via keyboard (Tab, Enter, Escape).
@@ -64,12 +64,13 @@ export default function AccessibilityPage() {
             </li>
             <li>
               <strong className="text-foreground">Screen Reader Support:</strong> All icons are
-              accompanied by text labels or have <code className="text-foreground">aria-hidden</code>{' '}
-              attributes. Icon-only buttons include descriptive <code className="text-foreground">aria-label</code> values.
+              accompanied by text labels or have{' '}
+              <code className="text-foreground">aria-hidden</code> attributes. Icon-only buttons
+              include descriptive <code className="text-foreground">aria-label</code> values.
             </li>
             <li>
-              <strong className="text-foreground">Skip Navigation:</strong> A skip-to-content link is
-              provided as the first focusable element on each page.
+              <strong className="text-foreground">Skip Navigation:</strong> A skip-to-content link
+              is provided as the first focusable element on each page.
             </li>
             <li>
               <strong className="text-foreground">Form Labels:</strong> All form inputs have
@@ -77,7 +78,8 @@ export default function AccessibilityPage() {
             </li>
             <li>
               <strong className="text-foreground">Error Messaging:</strong> Form errors are
-              announced to screen readers using <code className="text-foreground">role=&quot;alert&quot;</code>.
+              announced to screen readers using{' '}
+              <code className="text-foreground">role=&quot;alert&quot;</code>.
             </li>
           </ul>
         </section>
@@ -88,8 +90,8 @@ export default function AccessibilityPage() {
             We use <code className="text-foreground">jest-axe</code> and the{' '}
             <code className="text-foreground">eslint-plugin-jsx-a11y</code> ESLint plugin to
             automatically detect accessibility violations during development and in our CI pipeline.
-            All pages are required to pass automated accessibility checks with zero violations before
-            deployment.
+            All pages are required to pass automated accessibility checks with zero violations
+            before deployment.
           </p>
         </section>
 
@@ -111,7 +113,12 @@ export default function AccessibilityPage() {
         </section>
 
         <p className="text-muted-foreground text-sm leading-relaxed">
-          Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+          Last updated:{' '}
+          {new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
         </p>
       </main>
 
