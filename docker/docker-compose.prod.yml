@@ -1,0 +1,170 @@
+# Production Docker Compose configuration for ValoraSec.
+# Usage:
+#   docker compose -f docker/docker-compose.yml -f docker/docker-compose.prod.yml up -d
+#
+# Prerequisites:
+#   1. Copy docker/prod.env.example to docker/prod.env and fill in values
+#   2. Ensure DNS points to your server IP
+#   3. Ports 80 and 443 must be reachable
+
+services:
+  # ─── Caddy Reverse Proxy (SSL Termination) ────────────────────────────
+  caddy:
+    image: caddy:2-alpine
+    container_name: valorasec-caddy
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    environment:
+      - CADDY_DOMAIN=${CADDY_DOMAIN:-localhost}
+    restart: unless-stopped
+    networks:
+      - valorasec-prod
+    healthcheck:
+      test: ['CMD', 'caddy', 'version']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+    logging:
+      driver: json-file
+      options:
+        max-size: '20m'
+        max-file: '5'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256M'
+        reservations:
+          cpus: '0.25'
+          memory: '128M'
+
+  # ─── PostgreSQL ───────────────────────────────────────────────────────
+  postgres:
+    extends:
+      file: docker-compose.yml
+      service: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-valorasec}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d:ro
+    networks:
+      - valorasec-prod
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: '50m'
+        max-file: '5'
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '512M'
+        reservations:
+          cpus: '0.5'
+          memory: '256M'
+
+  # ─── Redis ────────────────────────────────────────────────────────────
+  redis:
+    extends:
+      file: docker-compose.yml
+      service: redis
+    command: redis-server --requirepass ${REDIS_PASSWORD} --appendonly yes
+    networks:
+      - valorasec-prod
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: '20m'
+        max-file: '5'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '256M'
+        reservations:
+          cpus: '0.25'
+          memory: '128M'
+
+  # ─── API ──────────────────────────────────────────────────────────────
+  api:
+    extends:
+      file: docker-compose.yml
+      service: api
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-valorasec}?schema=public
+      JWT_SECRET: ${JWT_SECRET}
+      JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-15m}
+      JWT_REFRESH_EXPIRES_IN_MS: ${JWT_REFRESH_EXPIRES_IN_MS:-604800000}
+      PORT: '4000'
+      CORS_ORIGIN: ${CORS_ORIGIN:-https://${CADDY_DOMAIN:-localhost}}
+      NODE_ENV: production
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+      STELLAR_NETWORK: ${STELLAR_NETWORK:-mainnet}
+      SOROBAN_RPC_URL: ${SOROBAN_RPC_URL:-https://soroban.stellar.org}
+      AUDIT_REGISTRY_CONTRACT: ${AUDIT_REGISTRY_CONTRACT:-}
+      REPUTATION_CONTRACT: ${REPUTATION_CONTRACT:-}
+      BUG_BOUNTY_CONTRACT: ${BUG_BOUNTY_CONTRACT:-}
+    ports: [] # No direct port exposure — only through Caddy
+    networks:
+      - valorasec-prod
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: '50m'
+        max-file: '5'
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: '512M'
+        reservations:
+          cpus: '0.5'
+          memory: '256M'
+
+  # ─── Web ──────────────────────────────────────────────────────────────
+  web:
+    extends:
+      file: docker-compose.yml
+      service: web
+    environment:
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-https://${CADDY_DOMAIN:-localhost}/api}
+    ports: [] # No direct port exposure — only through Caddy
+    networks:
+      - valorasec-prod
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: '20m'
+        max-file: '5'
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: '512M'
+        reservations:
+          cpus: '0.25'
+          memory: '256M'
+
+# ─── Networks ────────────────────────────────────────────────────────────
+networks:
+  valorasec-prod:
+    driver: bridge
+
+# ─── Volumes ─────────────────────────────────────────────────────────────
+volumes:
+  caddy_data:
+  caddy_config:
+  postgres_data:
+  redis_data:
