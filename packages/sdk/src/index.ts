@@ -13,6 +13,21 @@ import {
   type User,
 } from '@valorasec/shared';
 
+export {
+  AuthError,
+  ConflictError,
+  errorForStatus,
+  ForbiddenError,
+  NotFoundError,
+  ServerError,
+  ValidationError,
+  ValoraSecError,
+} from './errors';
+import {
+  errorForStatus,
+  type ValoraSecError as _ValoraSecErrorType,
+} from './errors';
+
 export interface SdkConfig {
   baseUrl: string;
   accessToken?: string;
@@ -76,12 +91,11 @@ export class ValoraSecClient {
     }
 
     if (!res.ok) {
-      const error: ApiError = await res.json().catch(() => ({
-        statusCode: res.status,
-        message: res.statusText,
-        error: 'Unknown Error',
-      }));
-      throw new Error(`[${error.statusCode}] ${error.message}`);
+      const errorBody = await res.json().catch(() => null) as ApiError | null;
+      throw errorForStatus(res.status, errorBody?.message ?? res.statusText, {
+        code: errorBody?.error,
+        body: errorBody ?? undefined,
+      });
     }
 
     return res.json();
